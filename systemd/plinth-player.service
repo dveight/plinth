@@ -1,0 +1,25 @@
+[Unit]
+Description=Plinth service which reads all files in $PLINTH_HOME/media
+After=graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/plinth/scripts/play.sh
+
+# Robust restart behaviour
+Restart=always
+RestartSec=2
+
+ExecStartPre=/bin/bash -c 'until xset q >/dev/null 2>&1; do sleep 1; done'
+
+# Clean shutdown handling
+KillMode=process
+TimeoutStopSec=5
+
+# Prevent runaway restart storms
+StartLimitInterval=30
+StartLimitBurst=10
+
+[Install]
+WantedBy=graphical-session.target

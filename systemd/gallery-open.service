@@ -1,0 +1,10 @@
+[Unit]
+Description=Plinth — Turn on TVs at gallery open
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/plinth/scripts/gallery-open.sh
+
+[Install]
+WantedBy=default.target
