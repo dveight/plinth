@@ -79,7 +79,7 @@ fi
 # ── Systemd services ──────────────────────────────────────────
 echo ""
 echo -e "${BOLD}── Services ───────────────────────────────────${NC}"
-for SERVICE in plinth gallery-open; do
+for SERVICE in plinth-player gallery-open; do
     STATUS=$(systemctl --user is-active ${SERVICE}.service 2>/dev/null)
     if [ "$STATUS" == "active" ]; then
         echo -e " ${SERVICE} : ${GREEN}running${NC}"
