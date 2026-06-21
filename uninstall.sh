@@ -135,10 +135,16 @@ if [ -d "$PLINTH_HOME" ]; then
         log "Removed $PLINTH_HOME"
     else
         warn "Leaving $PLINTH_HOME in place"
+    fi    
+    # Remove venv separately so it's always cleaned up
+    if [ -d "$PLINTH_HOME/venv" ]; then
+        rm -rf "$PLINTH_HOME/venv"
+        log "Removed venv"
     fi
 else
     warn "$PLINTH_HOME not found"
 fi
+
 
 # ── Done ──────────────────────────────────────────────────────
 section "Done"
