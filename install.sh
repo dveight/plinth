@@ -207,6 +207,23 @@ else
     log "mpv.conf copied to $MPV_CONF_DEST"
 fi
 
+# ── Python venv ───────────────────────────────────────────────
+section "Python Environment"
+
+if [ ! -d "$PLINTH_HOME/venv" ]; then
+    python3 -m venv "$PLINTH_HOME/venv"
+    log "Python venv created"
+else
+    warn "Python venv already exists — skipping"
+fi
+
+if [ -f "$PLINTH_HOME/requirements.txt" ]; then
+    "$PLINTH_HOME/venv/bin/pip" install -r "$PLINTH_HOME/requirements.txt" >> "$LOG" 2>&1
+    log "Python requirements installed"
+else
+    warn "No requirements.txt found — skipping"
+fi
+
 # ── Display Cleanup ───────────────────────────────────────────
 section "Display Cleanup"
 
@@ -233,6 +250,7 @@ sudo -u "$USER_NAME" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $USER
 sudo -u "$USER_NAME" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $USER_NAME)/bus" \
     gsettings set org.gnome.shell welcome-dialog-last-shown-version '999'
 log "GNOME notifications and welcome dialog disabled"
+
 
 # ── Done ──────────────────────────────────────────────────────
 section "Done"
