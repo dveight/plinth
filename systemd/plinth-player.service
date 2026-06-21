@@ -10,8 +10,7 @@ ExecStart=%h/plinth/scripts/play.sh
 # Robust restart behaviour
 Restart=always
 RestartSec=2
-
-ExecStartPre=/bin/bash -c 'until xset q >/dev/null 2>&1; do sleep 1; done'
+ExecStartPre=/bin/bash -c 'until [ -S "${XDG_RUNTIME_DIR}/wayland-0" ]; do sleep 1; done'
 
 # Clean shutdown handling
 KillMode=process
