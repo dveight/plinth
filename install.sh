@@ -207,6 +207,33 @@ else
     log "mpv.conf copied to $MPV_CONF_DEST"
 fi
 
+# ── Display Cleanup ───────────────────────────────────────────
+section "Display Cleanup"
+
+# Disable release upgrade prompts
+sudo sed -i 's/Prompt=.*/Prompt=never/' /etc/update-manager/release-upgrades
+log "Release upgrade prompts disabled"
+
+# Disable auto updates
+sudo tee /etc/apt/apt.conf.d/20auto-upgrades > /dev/null <<EOF
+APT::Periodic::Update-Package-Lists "0";
+APT::Periodic::Unattended-Upgrade "0";
+EOF
+log "Auto updates disabled"
+
+# Disable crash reports
+sudo systemctl disable apport.service 2>/dev/null
+sudo systemctl stop apport.service 2>/dev/null
+log "Crash reporting disabled"
+
+# Disable GNOME notifications and welcome dialog
+# These must run as the user not root
+sudo -u "$USER_NAME" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $USER_NAME)/bus" \
+    gsettings set org.gnome.desktop.notifications show-banners false
+sudo -u "$USER_NAME" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $USER_NAME)/bus" \
+    gsettings set org.gnome.shell welcome-dialog-last-shown-version '999'
+log "GNOME notifications and welcome dialog disabled"
+
 # ── Done ──────────────────────────────────────────────────────
 section "Done"
 echo -e " ${GREEN}Plinth installed successfully${NC}"
