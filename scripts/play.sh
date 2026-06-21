@@ -39,4 +39,4 @@ fi
 
 echo "$(date): Playlist generated with $(wc -l < "$PLAYLIST") files" >> "$LOG"
 
-mpv --fs --no-audio --loop-playlist --playlist="$PLAYLIST"
+mpv --playlist="$PLAYLIST"

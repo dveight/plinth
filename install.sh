@@ -98,6 +98,8 @@ else
 export PLINTH_HOME="\$HOME/plinth"
 export PATH="\$PLINTH_HOME/scripts:\$PATH"
 alias plinth="\$PLINTH_HOME/scripts/plinth.sh"
+alias tv="\$PLINTH_HOME/venv/bin/python3 \$PLINTH_HOME/scripts/tv.py"
+
 EOF
     log "PLINTH_HOME and aliases added to .bashrc"
 fi

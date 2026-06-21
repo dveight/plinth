@@ -40,10 +40,9 @@ fi
 
 echo "$(date): Gallery opening (scheduled boot)" >> "$LOG"
 
-sleep 30
+sleep 60
 
 # TV on commands go here
-# irsend SEND_ONCE LG-TV KEY_POWER
-# python3 "$PLINTH_HOME/scripts/lg-on.py"
+"$PLINTH_HOME/venv/bin/python3" "$PLINTH_HOME/scripts/tv.py" on
 
 echo "$(date): TVs on" >> "$LOG"

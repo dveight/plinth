@@ -1,1 +1,4 @@
 venv/
+config/gallery/.tv-token
+config/gallery/.maintenance
+config/gallery/.scheduled_shutdown

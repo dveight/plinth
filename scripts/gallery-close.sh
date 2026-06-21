@@ -31,8 +31,7 @@ if [[ "$TIME_NOW" > "$CLOSE_TIME" ]] || [[ "$TIME_NOW" == "$CLOSE_TIME" ]]; then
     echo "$(date): Closing gallery (scheduled)" >> "$LOG"
 
     # TV off commands go here
-    # irsend SEND_ONCE LG-TV KEY_POWER
-    # python3 "$PLINTH_HOME/scripts/lg-off.py"
+    "$PLINTH_HOME/venv/bin/python3" "$PLINTH_HOME/scripts/tv.py" off
 
     sudo /sbin/shutdown -h now
 fi
