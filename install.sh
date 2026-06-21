@@ -37,7 +37,7 @@ read -rp "Continue? (y/n): " CONFIRM </dev/tty
 
 # ── Dependencies ──────────────────────────────────────────────
 section "Dependencies"
-DEPS=(git mpv curl)
+DEPS=(git mpv curl python3-venv)
 sudo apt-get update -qq
 
 for DEP in "${DEPS[@]}"; do
