@@ -253,6 +253,10 @@ sudo -u "$USER_NAME" DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u $USER
     gsettings set org.gnome.shell welcome-dialog-last-shown-version '999'
 log "GNOME notifications and welcome dialog disabled"
 
+# Disable swap
+sudo swapoff -a
+sudo sed -i 's/^\/swap/#\/swap/' /etc/fstab
+log "Swap disabled"
 
 # ── Done ──────────────────────────────────────────────────────
 section "Done"
