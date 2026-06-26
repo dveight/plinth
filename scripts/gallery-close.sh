@@ -32,6 +32,4 @@ if [[ "$TIME_NOW" > "$CLOSE_TIME" ]] || [[ "$TIME_NOW" == "$CLOSE_TIME" ]]; then
 
     # TV off commands go here
     "$PLINTH_HOME/venv/bin/python3" "$PLINTH_HOME/scripts/tv.py" off
-
-    sudo /sbin/shutdown -h now
 fi

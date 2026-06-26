@@ -38,5 +38,4 @@ if [ ! -s "$PLAYLIST" ]; then
 fi
 
 echo "$(date): Playlist generated with $(wc -l < "$PLAYLIST") files" >> "$LOG"
-
-mpv --playlist="$PLAYLIST"
+unclutter -idle 0 & mpv --playlist="$PLAYLIST"
