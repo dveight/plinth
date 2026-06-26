@@ -46,7 +46,7 @@ def main():
         tv = get_tv()
         tv.art().set_artmode("off")
         tv.send_key('KEY_HDMI')
-        print("TV on")
+        print("tv on")
 
     elif command == 'off':
         tv = get_tv()
