@@ -13,8 +13,9 @@ RestartSec=2
 ExecStartPre=/bin/bash -c 'until [ -S "${XDG_RUNTIME_DIR}/wayland-0" ]; do sleep 1; done'
 
 # Clean shutdown handling
-KillMode=process
 TimeoutStopSec=5
+KillMode=control-group
+KillSignal=SIGTERM
 
 # Prevent runaway restart storms
 StartLimitInterval=30

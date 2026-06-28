@@ -5,9 +5,9 @@ CONFIG="$PLINTH_HOME/config/gallery/hours.txt"
 LOG="$PLINTH_HOME/logs/gallery.log"
 FLAG=/tmp/plinth_closed
 MAINTENANCE_FLAG="$PLINTH_HOME/config/.maintenance"
-SCHEDULED_FLAG="$PLINTH_HOME/config/.scheduled_shutdown"
 DAY=$(date +%w)
 TIME_NOW=$(date +%H:%M)
+SOCKET="$PLINTH_HOME/plinth.sock"
 
 mkdir -p "$PLINTH_HOME/logs"
 
@@ -27,9 +27,10 @@ fi
 
 if [[ "$TIME_NOW" > "$CLOSE_TIME" ]] || [[ "$TIME_NOW" == "$CLOSE_TIME" ]]; then
     touch "$FLAG"
-    touch "$SCHEDULED_FLAG"
     echo "$(date): Closing gallery (scheduled)" >> "$LOG"
 
     # TV off commands go here
-    "$PLINTH_HOME/venv/bin/python3" "$PLINTH_HOME/scripts/tv.py" off
+    echo '{"command": ["loadfile", "'"$PLINTH_HOME/standby/black.mov"'", "replace"]}' | socat - "$SOCKET"
+    echo '{"command": ["set_property", "pause", true]}' | socat - "$SOCKET"
+    rm -f "/tmp/plinth_opened"
 fi
